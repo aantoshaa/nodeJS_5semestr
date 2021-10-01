@@ -11,24 +11,11 @@ const server = http.createServer( (req, res) => {
             res.writeHead(200, {
                 'Content-Type': 'text/html'
             });
-
-            const filePath = path.join(__dirname, "views", "index.html");
-            fs.readFile(filePath, (err, content) => {
-                if (err) {
-                    throw err;
-                }
-                res.end(content);
-            })
+            getViewAndSend("index.html", res);
             break;
         }
         case "/png": {
-            const filePath = path.join(__dirname, "views", "programming.png");
-            fs.readFile(filePath, (err, content) => {
-                if (err) {
-                    throw err;
-                }
-                res.end(content);
-            })
+            getViewAndSend("programming.png", res);
             break;
         }
         case "/api/name": {
@@ -39,41 +26,30 @@ const server = http.createServer( (req, res) => {
             break;
         }
         case "/xmlhttprequest": {
-
-            const filePath = path.join(__dirname, "views", "xmlhttprequest.html");
-            fs.readFile(filePath, (err, content) => {
-                if (err) {
-                    throw err;
-                }
-                res.end(content);
-            })
+            getViewAndSend("xmlhttprequest.html", res);
             break;
         }
         case "/fetch": {
-
-            const filePath = path.join(__dirname, "views", "fetch.html");
-            fs.readFile(filePath, (err, content) => {
-                if (err) {
-                    throw err;
-                }
-                res.end(content);
-            })
+            getViewAndSend("fetch.html", res);
             break;
         }
         case "/jquery": {
-
-            const filePath = path.join(__dirname, "views", "jquery.html");
-            fs.readFile(filePath, (err, content) => {
-                if (err) {
-                    throw err;
-                }
-                res.end(content);
-            })
+            getViewAndSend("jquery.html", res);
             break;
         }
     }
 });
 
 server.listen(PORT, () => {
-    console.log(`Server has been started on ${PORT}...`)
-})
+    console.log(`Server has been started on ${PORT}...`);
+});
+
+function getViewAndSend(fileName, response) {
+    let filePath = path.join(__dirname, "views", fileName);
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            console.error(err);
+        }
+        response.end(data);
+    });
+}
