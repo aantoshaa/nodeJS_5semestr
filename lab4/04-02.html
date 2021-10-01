@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="data">[]</div>
+<button onclick="get()">GET</button>
+<br><br>
+
+<div id="addgroup" style="display: none">
+    <input class="id" type="number" placeholder="id">
+    <input class="name" type="text" placeholder="name">
+    <input class="bday" type="number" placeholder="bday">
+    <button onclick="post()">POST</button>
+    <button onclick="closeFormAdd()">X</button>
+</div>
+<button id="addbutton" onclick="add()">Add</button>
+<br><br>
+
+<div id="editgroup" style="display: none">
+    <input class="name" type="text" placeholder="name">
+    <input class="bday" type="number" placeholder="bday">
+    <button onclick="put()">PUT</button>
+    <button onclick="closeFormEdit()">X</button>
+</div>
+<input id="idedit" type="number">
+<button id="editbutton" onclick="edit()">Edit</button>
+
+<br><br>
+
+<input id="iddelete" type="number">
+<button onclick="deleteUser()">DELETE</button>
+
+</body>
+<script>
+    function get() {
+        const dataTag = document.querySelector('#data');
+        fetch('http://localhost:3000/api/db', { method: 'GET'})
+            .then(response => response.text())
+            .then(data => dataTag.textContent = data);
+    }
+    function post() {
+        const addGroup = document.querySelector('#addgroup');
+        const id = +addGroup.querySelector(".id").value;
+        const name = addGroup.querySelector(".name").value;
+        const bday = +addGroup.querySelector(".bday").value;
+
+        fetch("http://localhost:3000/api/db", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify({ id, name, bday})
+        })
+            .then(response => response.json())
+            .then(data => {
+                const dataTag = document.querySelector("#data");
+                const users = JSON.parse(dataTag.textContent);
+                users.push(data);
+                dataTag.textContent = JSON.stringify(users);
+            })
+    }
+    function put() {
+        const editGroup = document.querySelector('#editgroup')
+        const id = +document.querySelector("#idedit").value;
+        const name = editGroup.querySelector(".name").value;
+        const bday = +editGroup.querySelector(".bday").value;
+        const user = {id, name, bday};
+
+        fetch("http://localhost:3000/api/db", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify(user)
+        })
+            .then(() => {
+                const dataTag = document.querySelector("#data");
+                const users = JSON.parse(dataTag.textContent);
+                users[users.findIndex(u => u.id === user.id)] = user;
+                dataTag.textContent = JSON.stringify(users);
+            })
+            .catch(() => {})
+    }
+    function deleteUser() {
+        const id = document.querySelector("#iddelete").value;
+
+        fetch(`http://localhost:3000/api/db?id=${id}`, {
+            method: "DELETE",
+        })
+            .then(() => {
+                const dataTag = document.querySelector("#data");
+                const users = JSON.parse(dataTag.textContent);
+                users.splice(users.findIndex(u => u.id === id), 1);
+                dataTag.textContent = JSON.stringify(users);
+            })
+            .catch(() => {})
+    }
+
+
+    function add() {
+        document.querySelector('#addgroup').style.display = 'inline';
+        document.querySelector('#addbutton').style.display = 'none';
+    }
+    function closeFormAdd() {
+        document.querySelector('#addgroup').style.display = 'none';
+        document.querySelector('#addbutton').style.display = 'inline';
+    }
+
+
+    function edit() {
+        const editGroup = document.querySelector('#editgroup');
+        editGroup.style.display = 'inline';
+        document.querySelector('#editbutton').style.display = 'none';
+        const idInput = document.querySelector('#idedit');
+        idInput.style.display = 'none';
+        const id = idInput.value;
+
+        const dataTag = document.querySelector("#data");
+        const users = JSON.parse(dataTag.textContent);
+        const user = users[users.findIndex(u => u.id == id)];
+        editGroup.querySelector('.name').value = user?.name;
+        editGroup.querySelector('.bday').value = user?.bday;
+    }
+    function closeFormEdit() {
+        document.querySelector('#editgroup').style.display = 'none';
+        document.querySelector('#editbutton').style.display = 'inline';
+        document.querySelector('#idedit').style.display = 'inline';
+    }
+</script>
+</html>
