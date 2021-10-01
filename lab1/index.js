@@ -11,9 +11,9 @@ const server = http.createServer( (req, res) => {
     res.write('<br>URL: ' + req.url);
 
     res.end();
-
 });
 
 server.listen(PORT, () => {
-    console.log(`Server has been started on ${PORT}...`)
-})
+    console.log(`Server has been started on ${PORT}...`);
+});
+
