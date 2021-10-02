@@ -37,4 +37,4 @@ class Stat {
     }
 }
 
-module.exports = Stat;
+module.exports = (param) => new Stat(param);

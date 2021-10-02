@@ -1,7 +1,6 @@
 const http = require('http');
 const fs = require('fs');
-const Stat = require('./static');
-const stat = new Stat('./static');
+const stat = require('./static')('./static');
 const PORT = 3000;
 
 const MIME = {
