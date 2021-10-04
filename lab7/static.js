@@ -1,5 +1,20 @@
 const fs = require('fs');
 
+exports.MIME = {
+    HTML: Symbol('text/html; charset=utf-8'),
+    CSS: Symbol('text/css'),
+    JS: Symbol('text/javascript'),
+    PNG: Symbol('image/png'),
+    DOCX: Symbol('application/msword'),
+    JSON: Symbol('application/json'),
+    XML: Symbol('application/xml'),
+    MP4: Symbol('video/mp4')
+};
+
+exports.getHeader = (mime) => {
+    return { 'Content-Type': mime.toString() };
+};
+
 class Stat {
     constructor(sfn = './static') {
         this.STATIC_FOLDER = sfn;
@@ -37,4 +52,4 @@ class Stat {
     }
 }
 
-module.exports = (param) => new Stat(param);
+exports.stat = (pathStatic) => new Stat(pathStatic);

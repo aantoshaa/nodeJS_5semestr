@@ -1,18 +1,8 @@
 const http = require('http');
 const fs = require('fs');
-const stat = require('./static')('./static');
+const { stat, MIME, getHeader } = require('./static');
+const st = stat('./static');
 const PORT = 3000;
-
-const MIME = {
-    HTML: Symbol('text/html; charset=utf-8'),
-    CSS: Symbol('text/css'),
-    JS: Symbol('text/javascript'),
-    PNG: Symbol('image/png'),
-    DOCX: Symbol('application/msword'),
-    JSON: Symbol('application/json'),
-    XML: Symbol('application/xml'),
-    MP4: Symbol('video/mp4')
-};
 
 const server = http.createServer((req, res) => {
     switch(req.method) {
@@ -20,22 +10,22 @@ const server = http.createServer((req, res) => {
             getHandler(req, res);
             break;
         default:
-            stat.writeHTTP405(req, res);
+            st.writeHTTP405(req, res);
     }
 });
 
 //region Handler
 const getHandler = (req, res) => {
-    if      (stat.isStatic('html', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.HTML.toString() });
-    else if (stat.isStatic('css', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.CSS.toString() });
-    else if (stat.isStatic('js', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.JS.toString() });
-    else if (stat.isStatic('png', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.PNG.toString() });
-    else if (stat.isStatic('docx', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.DOCX.toString() });
-    else if (stat.isStatic('json', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.JSON.toString() });
-    else if (stat.isStatic('xml', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.XML.toString() });
-    else if (stat.isStatic('mp4', req.url)) stat.sendFile(req, res, { 'Content-Type': MIME.MP4.toString() });
+    if      (st.isStatic('html', req.url)) st.sendFile(req, res, getHeader(MIME.HTML));
+    else if (st.isStatic('css', req.url)) st.sendFile(req, res, getHeader(MIME.CSS));
+    else if (st.isStatic('js', req.url)) st.sendFile(req, res, getHeader(MIME.JS));
+    else if (st.isStatic('png', req.url)) st.sendFile(req, res, getHeader(MIME.PNG));
+    else if (st.isStatic('docx', req.url)) st.sendFile(req, res, getHeader(MIME.DOCX));
+    else if (st.isStatic('json', req.url)) st.sendFile(req, res, getHeader(MIME.JSON));
+    else if (st.isStatic('xml', req.url)) st.sendFile(req, res, getHeader(MIME.XML));
+    else if (st.isStatic('mp4', req.url)) st.sendFile(req, res, getHeader(MIME.MP4));
     else {
-        stat.writeHTTP404(req, res);
+        st.writeHTTP404(req, res);
     }
 };
 //endregion
