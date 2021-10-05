@@ -1,0 +1,18 @@
+JSON
+{
+    "__comment": "Запрос. Лабораторная 8/10",
+    "x": 1,
+    "y": 2,
+    "s": "Сообщение",
+    "m": ["a","b","c","d"],
+    "o": {"surname": "Иванов", "name": "Иван"}
+}
+
+XML
+<request id = "28">
+    <x value = "1"/>
+    <x value = "2"/>
+    <m value = "a"/>
+    <m value = "b"/>
+    <m value = "c"/>
+</request>
