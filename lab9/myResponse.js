@@ -11,7 +11,7 @@ const MIME = {
 exports.MIME = MIME;
 
 function getHeader(mime) {
-    return { 'Content-Type': mime.toString() };
+    return { 'Content-Type': mime.description };
 }
 exports.getHeader = getHeader;
 
