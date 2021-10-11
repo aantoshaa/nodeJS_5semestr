@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab10</title>
+</head>
+<body>
+<h2>10-01</h2>
+<button onclick="startWS()">startWS</button>
+</body>
+<script>
+    function startWS() {
+        const ws = new WebSocket('ws://localhost:4000');
+        ws.onmessage = message => {
+            console.log(message.data);
+        };
+
+        let countMessages = 0;
+        const handler = setInterval(() => {
+            ws.send(`10-01-client: ${countMessages++}`);
+        }, 3000);
+        setTimeout(() => {
+            clearInterval(handler);
+            ws.close(1000, 'Работа закончена');
+            console.log('Работа закончена');
+        }, 25000)
+    }
+</script>
+</html>
