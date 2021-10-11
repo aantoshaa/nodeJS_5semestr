@@ -73,6 +73,7 @@ function getHandler(req, res) {
             break;
         case '/req-data':
             req.on('data', (data) => {
+                console.log('PART');
                 res.write(data)
             });
             req.on('end', () => {
