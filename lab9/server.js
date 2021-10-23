@@ -36,7 +36,7 @@ function getHandler(req, res) {
             write200(res, `x = ${path.query.x}; y = ${path.query.y}`, MIME.HTML);
             break;
         case '/task8':
-            write200(res, fs.readFileSync('MyFile.png'), MIME.PNG);
+            write200(res, fs.readFileSync('nodeJS.png'), MIME.PNG);
             break;
         default:
             write404(req, res);
@@ -67,12 +67,21 @@ function postHandler(req, res) {
             });
             break;
         case '/task6-7':
-            let result = '';
-            let form = new mp.Form({uploadDir:'./static'});
-            form.on('field',(name,value) => {});
-            form.on('file', (name, file) => {});
+            let form =new mp.Form({uploadDir:'./static'});
+            form.on('field',(name,value)=>
+            {
+                console.log('------------field-------------');
+                console.log(name,value);
+            });
+            form.on('file', (name, file)=>
+            {
+                console.log('-----file ------------');
+                console.log(name,file);
+           });
+            form.on("close", () => {
+                res.end("Файл получен");
+            });
             form.parse(req);
-            res.end();
             break;
         default:
             write404(req, res);
