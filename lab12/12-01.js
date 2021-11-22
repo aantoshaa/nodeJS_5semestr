@@ -1,5 +1,6 @@
 const http = require('http');
 const handlers = require('./handlers.js');
+const {StudentPointError} = require("./StudentPointError");
 const PORT = 3000;
 
 const server = http.createServer();
@@ -23,7 +24,11 @@ server.on('request', (req, res) => {
                     handlers.write405(req, res);
             }
         } catch (err) {
-            res.end(JSON.stringify({error: err.error, message: err.message}));
+            if (err instanceof StudentPointError) {
+                res.end(JSON.stringify({error: err.error, message: err.message}));
+            } else {
+                res.end(JSON.stringify({message: err.message}));
+            }
         }
     })();
 });
