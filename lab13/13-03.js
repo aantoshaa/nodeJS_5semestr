@@ -11,7 +11,7 @@ tcpServer.on('connection', socket => {
 
     const handlerInterval = setInterval(() => {
         socket.write(`SUM: ${sum}`);
-    }, 3000);
+    }, 2100);
 
     socket.on('close', () => {
         clearInterval(handlerInterval);
