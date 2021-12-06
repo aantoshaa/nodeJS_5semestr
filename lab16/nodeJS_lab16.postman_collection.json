@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "007ef45c-7f21-48d6-a8cf-25c7e1759f76",
+		"name": "nodeJS_lab16",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "faculty",
+			"item": [
+				{
+					"name": "query",
+					"item": [
+						{
+							"name": "get_one_faculty",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query getFaculty ($faculty: String) {\r\n    getFaculties(faculty: $faculty) {\r\n        faculty,\r\n        faculty_name,\r\n        pulpits {\r\n            pulpit,\r\n            pulpit_name\r\n        }\r\n    }   \r\n}",
+										"variables": "{\r\n    \"faculty\": \"ИДи\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_all_faculty",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    getFaculties {\r\n        faculty,\r\n        faculty_name,\r\n        pulpits {\r\n            pulpit,\r\n            pulpit_name\r\n        }\r\n    }   \r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "mutation",
+					"item": [
+						{
+							"name": "set_faculty",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation setF ($faculty: InFaculty!) {\r\n    setFaculty(faculty: $faculty) {\r\n        faculty,\r\n        faculty_name\r\n    }   \r\n}",
+										"variables": "{\r\n    \"faculty\": {\r\n        \"faculty\": \"test\",\r\n        \"faculty_name\": \"test\"\r\n    }\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete_faculty",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation delF ($faculty: String!) {\r\n    delFaculty(faculty: $faculty) \r\n}",
+										"variables": "{\r\n    \"faculty\": \"test\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "pulpit",
+			"item": [
+				{
+					"name": "mutation",
+					"item": [
+						{
+							"name": "set_pulpit",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation setP ($pulpit: InPulpit!) {\r\n    setPulpit(pulpit: $pulpit) {\r\n        pulpit,\r\n        pulpit_name,\r\n        faculty\r\n    }   \r\n}",
+										"variables": "{\r\n    \"pulpit\": {\r\n        \"pulpit\": \"test\",\r\n        \"pulpit_name\": \"test\",\r\n        \"faculty\": \"test\"\r\n    }\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete_pulpit",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation delP ($pulpit: String!) {\r\n    delPulpit(pulpit: $pulpit) \r\n}",
+										"variables": "{\r\n    \"pulpit\": \"test\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "query",
+					"item": [
+						{
+							"name": "get_one_pulpit",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query getPulpit ($pulpit: String) {\r\n    getPulpits(pulpit: $pulpit) {\r\n        pulpit,\r\n        pulpit_name,\r\n        faculty\r\n    }   \r\n}",
+										"variables": "{\r\n    \"pulpit\": \"ИСиТ\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_all_pulpit",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    getPulpits {\r\n        pulpit,\r\n        pulpit_name\r\n        faculty\r\n    }   \r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "teacher",
+			"item": [
+				{
+					"name": "mutation",
+					"item": [
+						{
+							"name": "set_teacher",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation setT ($teacher: InTeacher!) {\r\n    setTeacher(teacher: $teacher) {\r\n        teacher,\r\n        teacher_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": "{\r\n    \"teacher\": {\r\n        \"teacher\": \"test\",\r\n        \"teacher_name\": \"test\",\r\n        \"pulpit\": \"test\"\r\n    }\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete_teacher",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation delT ($teacher: String!) {\r\n    delTeacher(teacher: $teacher) \r\n}",
+										"variables": "{\r\n    \"teacher\": \"test\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "query",
+					"item": [
+						{
+							"name": "get_one_teacher",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query getTeacher ($teacher: String) {\r\n    getTeachers(teacher: $teacher) {\r\n        teacher,\r\n        teacher_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": "{\r\n    \"teacher\": \"АКНВЧ\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_all_teacher",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    getTeachers {\r\n        teacher,\r\n        teacher_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getTeacherByFaculty",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query getTeacherByF ($faculty: String!) {\r\n    getTeachersByFaculty(faculty: $faculty) {\r\n        teacher,\r\n        teacher_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": "{\r\n    \"faculty\": \"ИДиП\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "subject",
+			"item": [
+				{
+					"name": "mutation",
+					"item": [
+						{
+							"name": "set_subject",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation setS ($subject: InSubject!) {\r\n    setSubject(subject: $subject) {\r\n        subject,\r\n        subject_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": "{\r\n    \"subject\": {\r\n        \"subject\": \"test\",\r\n        \"subject_name\": \"test\",\r\n        \"pulpit\": \"test\"\r\n    }\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete_subject",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation delS ($subject: String!) {\r\n    delSubject(subject: $subject) \r\n}",
+										"variables": "{\r\n    \"subject\": \"test\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "query",
+					"item": [
+						{
+							"name": "get_one_subject",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query getSubject ($subject: String) {\r\n    getSubjects(subject: $subject) {\r\n        subject,\r\n        subject_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": "{\r\n    \"subject\": \"БД\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_all_subject",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n    getSubjects {\r\n        subject,\r\n        subject_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getSubjectByFaculty",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query getSubjectByF ($faculty: String!) {\r\n    getSubjectsByFaculty(faculty: $faculty) {\r\n        subject,\r\n        subject_name,\r\n        pulpit\r\n    }   \r\n}",
+										"variables": "{\r\n    \"faculty\": \"ИДиП\"\r\n}"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
