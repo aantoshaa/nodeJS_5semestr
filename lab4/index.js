@@ -18,7 +18,7 @@ server.on('request', (req, res) => {
             db.emit(req.method, req, res);
             break;
         case '/':
-            fs.readFile("04-02.html", (err, data) => {
+            fs.readFile("./04-02.html", (err, data) => {
                 if (err) {
                     console.log(err.message);
                     return;
