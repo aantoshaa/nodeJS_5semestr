@@ -143,10 +143,10 @@ process.stdin.on('readable', () => {
 
                         ss_timer = setTimeout(()=>
                         {
-                            console.log('Statistic writing >>> disabled');
+                            console.log('Statistic writing >>> enabled');
                             clearTimeout(ss_timer);
                             statistic.finishDate = Date();
-                            statistic.ssEnabled = false;
+                            statistic.ssEnabled = true;
                             ss_timer = null;
                         }, x * 1000);
                     }
