@@ -80,14 +80,6 @@ function putHandler(req, res) {
                     await client.connect();
                     const collection = await client.db(dataBase).collection(nameCollection);
 
-                    //region Проверка на уникальность
-                    const docs = await collection.find({}).toArray();
-                    docs.forEach(doc => {
-                        if (doc[nameCollection] === updateObj[nameCollection])
-                            throw new Error();
-                    });
-                    //endregion
-
                     const updateResult = await collection.findOneAndUpdate({[nameCollection]: updateObj[nameCollection]}, {$set: updateObj}, {returnDocument: 'after'});
                     res.end(JSON.stringify(updateResult));
                 } catch (err) {
